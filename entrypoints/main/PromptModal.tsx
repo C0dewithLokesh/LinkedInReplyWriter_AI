@@ -107,7 +107,7 @@ const PromptModal = ({
               }
               label={showRegenerateBtn ? "Regenerate" : "Generate"}
               containerClasses="h-full"
-              onClick={handleGenerate}
+              onClick={showRegenerateBtn ? () => null : handleGenerate}
             />
           </div>
         </div>
