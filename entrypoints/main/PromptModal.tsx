@@ -3,6 +3,7 @@ import GenerateIcon from "../../assets/GenerateIcon.svg";
 import InsertIcon from "../../assets/InsertIcon.svg";
 import RegenerateIcon from "../../assets/RegenerateIcon.svg";
 import { AiReply, UserChat } from "../components/Chat";
+import CustomTextarea from "../components/CustomTextArea";
 import PrimaryButton from "../components/PrimaryButton";
 
 interface IPrompts {
@@ -83,11 +84,9 @@ const PromptModal = ({
         ))}
 
         <div className="w-full flex flex-col items-center gap-5">
-          <input
-            type="text"
-            value={userPrompt}
-            className="bg-white w-full border border-[#C1C7D0] rounded-lg px-4 py-2 text-black outline-none text-[20px] font-normal leading-normal"
+          <CustomTextarea
             placeholder="Your prompt"
+            value={userPrompt}
             onChange={(e) => setUserPrompt(e.target.value)}
           />
 

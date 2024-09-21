@@ -3,8 +3,7 @@ import "./popup/style.css";
 import ReactDOM from "react-dom/client";
 
 export default defineContentScript({
-  // matches: ["https://*.linkedin.com/*"],
-  matches: ['<all_urls>'],
+  matches: ["https://*.linkedin.com/*"],
   cssInjectionMode: 'ui',
   async main(ctx) {
     const ui = await createShadowRootUi(ctx, {
