@@ -1,61 +1,28 @@
-import { useEffect, useState } from "react";
-import ReactDOM from 'react-dom/client';
-import AiIcon from "../assets/AI.svg";
+import Content from "./main/Content";
+import "./popup/style.css";
+import ReactDOM from "react-dom/client";
 
-const Content = () => {
-  const [showModal, setShowModal] = useState(false);
+export default defineContentScript({
+  // matches: ["https://*.linkedin.com/*"],
+  matches: ['<all_urls>'],
+  cssInjectionMode: 'ui',
+  async main(ctx) {
+    const ui = await createShadowRootUi(ctx, {
+      name: "ai-reply-root",
+      position: "inline",
+      onMount: (container) => {
+        const app: HTMLElement = document.createElement("div");
+        container.append(app);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const textBox = document.querySelector(".msg-form__contenteditable");
-      if (textBox) {
-        textBox.addEventListener("focus", handleFocus);
-        textBox.addEventListener("blur", handleBlur);
-        clearInterval(intervalId);
-      }
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-
-  const handleFocus = () => {
-    const textBox = document.querySelector(".msg-form__contenteditable");
-    const container = document.createElement("div");
-    container.className = "ai-icon";
-    container.setAttribute(
-      "style",
-      "position:absolute; bottom:0px; right:6px;"
-    );
-    const imgElement = document.createElement("img");
-    imgElement.src = AiIcon;
-    imgElement.alt = "ai-icon";
-    imgElement.setAttribute(
-      "style",
-      "width: 32px; height: 32px; cursor:pointer;"
-    );
-    imgElement.addEventListener("click", () => {
-      setShowModal(true);
+        const root = ReactDOM.createRoot(app);
+        root.render(<Content />);
+        return root;
+      },
+      onRemove: (root) => {
+        root?.unmount();
+      },
     });
-    container.appendChild(imgElement);
-    textBox?.appendChild(container);
-  };
 
-  const handleBlur = () => {
-    const textBox = document.querySelector(".msg-form__contenteditable");
-    const container = textBox?.querySelector(".ai-icon");
-    container?.remove();
-  };
-
-  return (
-    <div>
-      <div className="">Modal</div>
-    </div>
-  );
-};
-
-export const renderApp = (rootElement: HTMLElement) => {
-  ReactDOM.createRoot(rootElement).render(<Content />);
-};
-
-export default Content;
+    ui.mount();
+  },
+});
