@@ -20,7 +20,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       {...props}
     >
       {icon}
-      <span className={`text-[20px] font-semibold leading-normal ${textClasses}`}>
+      <span className={`text-[20px] font-semibold leading-normal text-white ${textClasses}`}>
         {label}
       </span>
     </button>

@@ -3,7 +3,7 @@ import GenerateIcon from "../../assets/GenerateIcon.svg";
 import InsertIcon from "../../assets/InsertIcon.svg";
 import RegenerateIcon from "../../assets/RegenerateIcon.svg";
 import { AiReply, UserChat } from "../components/Chat";
-import CustomTextarea from "../components/CustomTextArea";
+import CustomTextarea from "../components/CustomTextarea";
 import PrimaryButton from "../components/PrimaryButton";
 
 interface IPrompts {
@@ -96,7 +96,7 @@ const PromptModal = ({
                 icon={<img src={InsertIcon} />}
                 label="Insert"
                 containerClasses="!bg-transparent border-2 border-[#666D80] h-full"
-                textClasses="text-[#666D80]"
+                textClasses="!text-[#666D80]"
                 onClick={handleInsert}
               />
             )}
